@@ -5,7 +5,7 @@
     "username": "postgres",
     "password": "root",
     "database": "project_test_db",
-    "synchronize": true,
+    "synchronize": false,
     "logging": false,
     "entities": [
        "dist/core/database/entities/**/*{.ts,.js}"
