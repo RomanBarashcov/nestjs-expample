@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import { getRepository, MigrationInterface, QueryRunner } from "typeorm";
 
 export class Categories1586272659838 implements MigrationInterface {
 

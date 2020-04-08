@@ -1,17 +1,32 @@
 
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Role } from './role';
+import { Review } from './review';
 
-@Entity()
+@Entity('Users')
 export class User {
+
   @PrimaryGeneratedColumn()
-  id: number;
+  Id: number;
 
-  @Column()
-  firstName: string;
+  @Column("varchar")
+  Email: string;
 
-  @Column()
-  lastName: string;
+  @Column("int")
+  Phone: number;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column("varchar")
+  Password: string;
+
+  @Column("varchar")
+  Avatar: string;
+
+  @OneToOne(type => Role)
+  @JoinColumn()
+  Role: Role
+
+  @OneToMany(type => Review, review => review.Book)
+  @JoinColumn({name: "Id"})
+  Reviews: Review[];
+
 }
