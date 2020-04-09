@@ -1,17 +1,16 @@
-import { getRepository, MigrationInterface, QueryRunner} from "typeorm";
-import { BookSeed } from '../seed/book.seed';
+import { MigrationInterface, QueryRunner} from "typeorm";
 
 export class Books1586272664510 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
 
         await queryRunner.query(`CREATE TABLE "Books" (
-            "Id" SERIAL PRIMARY KEY,
-            "Title" VARCHAR(50) NOT NULL,
-            "Description" TEXT NOT NULL,
-            "Cover" VARCHAR(255),
-            "Price" INT DEFAULT 0,
-            "CategoryId" INT REFERENCES "Categories"("Id") ON DELETE CASCADE
+            "id" SERIAL PRIMARY KEY,
+            "title" VARCHAR(50) NOT NULL,
+            "description" TEXT NOT NULL,
+            "cover" VARCHAR(255),
+            "price" INT DEFAULT 0,
+            "categoryId" INT REFERENCES "Categories"("id") ON DELETE CASCADE
          )`);
 
     }

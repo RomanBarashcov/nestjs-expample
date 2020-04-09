@@ -5,8 +5,8 @@ export class Categories1586272659838 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
 
         await queryRunner.query(`CREATE TABLE "Categories" (
-            "Id" SERIAL PRIMARY KEY,
-            "Type" VARCHAR (50) UNIQUE NOT NULL
+            "id" SERIAL PRIMARY KEY,
+            "type" VARCHAR (50) UNIQUE NOT NULL
         )`);
 
     }

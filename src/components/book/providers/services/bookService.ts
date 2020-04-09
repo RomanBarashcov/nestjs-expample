@@ -10,7 +10,21 @@ export class BookService {
     private readonly bookRepository: BookRepository) {}
 
   async findAllBooks(): Promise<any> {
+
     return await this.bookRepository.getAll();
+
+  }
+
+  async findById(id: number): Promise<any> {
+
+    return await this.bookRepository.getById(id);
+
+  }
+
+  async findAllByCategory(id: number): Promise<any> {
+
+    return await this.bookRepository.getAllByCategory(id);
+
   }
 
 }

@@ -1,0 +1,1 @@
+export { DataMapper } from '../dataMapper/concretes/data.mapper';

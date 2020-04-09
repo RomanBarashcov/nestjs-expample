@@ -7,26 +7,26 @@ import { Review } from './review';
 export class User {
 
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
   @Column("varchar")
-  Email: string;
+  email: string;
 
   @Column("int")
-  Phone: number;
+  phone: number;
 
   @Column("varchar")
-  Password: string;
+  password: string;
 
   @Column("varchar")
-  Avatar: string;
+  avatar: string;
 
-  @OneToOne(type => Role)
-  @JoinColumn()
-  Role: Role
+  @OneToMany(type => Role, role => role.users)
+  @JoinColumn({name: "roleId"})
+  role: Role
 
-  @OneToMany(type => Review, review => review.Book)
-  @JoinColumn({name: "Id"})
-  Reviews: Review[];
+  @OneToMany(type => Review, review => review.book)
+  @JoinColumn({name: "id"})
+  reviews: Review[];
 
 }

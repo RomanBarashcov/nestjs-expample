@@ -5,12 +5,12 @@ export class Users1586272650486 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
 
         await queryRunner.query(`CREATE TABLE "Users" (
-            "Id" SERIAL PRIMARY KEY,
-            "Email" VARCHAR(50) UNIQUE NOT NULL,
-            "Phone" INT NOT NULL,
-            "Password" VARCHAR(50) UNIQUE NOT NULL,
-            "Avatar" VARCHAR(255),
-            "RoleId" INT REFERENCES "Roles"("Id") ON DELETE CASCADE
+            "id" SERIAL PRIMARY KEY,
+            "email" VARCHAR(50) UNIQUE NOT NULL,
+            "phone" INT NOT NULL,
+            "password" VARCHAR(50) UNIQUE NOT NULL,
+            "avatar" VARCHAR(255),
+            "roleId" INT REFERENCES "Roles"("id") ON DELETE CASCADE
          )`);
 
     }

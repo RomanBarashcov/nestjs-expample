@@ -1,13 +1,18 @@
 
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Book } from '../entities/book';
 
 @Entity('Categories')
 export class Category {
     
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
   @Column()
-  Type: string;
+  type: string;
+
+  @ManyToOne(type => Book, book => book.category)
+  @JoinColumn({name: "id"})
+  books: Book[]
 
 }

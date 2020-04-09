@@ -1,5 +1,5 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Category } from './category';
 import { Review } from './review';
 
@@ -7,26 +7,26 @@ import { Review } from './review';
 export class Book {
 
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
   @Column("varchar")
-  Title: string;
+  title: string;
 
   @Column("text")
-  Description: string;
+  description: string;
 
   @Column("varchar")
-  Cover: string;
+  cover: string;
 
   @Column("int")
-  Price: number;
+  price: number;
 
-  @OneToOne(type => Category)
-  @JoinColumn({name: "CategoryId"})
-  Category: Category;
+  @OneToMany(type => Category, category => category.books)
+  @JoinColumn({name: "categoryId"})
+  category: Category;
 
-  @ManyToOne(type => Review, Review => Review.Book)
-  @JoinColumn({name: "Id"})
-  Reviews: Review[];
+  @ManyToOne(type => Review, review => review.book)
+  @JoinColumn({name: "id"})
+  reviews: Review[];
 
 }

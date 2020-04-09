@@ -7,20 +7,20 @@ import { User } from './user';
 export class Review {
     
   @PrimaryGeneratedColumn()
-  Id: number;
+  id: number;
 
-  @OneToMany(type => User, User => User.Reviews)
-  @JoinColumn({name: 'UserId'})
-  User: User;
+  @OneToMany(type => User, user => user.reviews)
+  @JoinColumn({name: 'userId'})
+  user: User;
 
-  @OneToMany(type => Book, Book => Book.Reviews)
-  @JoinColumn({name: 'BookId'})
-  Book: Book;
+  @OneToMany(type => Book, Book => Book.reviews)
+  @JoinColumn({name: 'bookId'})
+  book: Book;
 
   @Column("text")
-  Review: string;
+  review: string;
 
   @Column("int")
-  Rating: number
+  rating: number
   
 }

@@ -5,8 +5,8 @@ export class Roles1586272616704 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
 
         await queryRunner.query(`CREATE TABLE "Roles" (
-            "Id" SERIAL PRIMARY KEY,
-            "Type" VARCHAR (50) UNIQUE NOT NULL
+            "id" SERIAL PRIMARY KEY,
+            "type" VARCHAR (50) UNIQUE NOT NULL
         )`);
         
     }
