@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BookRepository } from '../repositories/book.repository';
-import { Book } from '../../../../core/database/entities/book';
+import { ReviewRepository } from '../repositories/review.repository';
+import { CreateReviewDto } from '../../dto/review/crate.review.dto';
 
 @Injectable()
 export class BookService {
 
-  constructor(@InjectRepository(BookRepository) 
-    private readonly bookRepository: BookRepository) {}
+  constructor(@InjectRepository(BookRepository)
+    private readonly bookRepository: BookRepository,
+    @InjectRepository(ReviewRepository)
+    private readonly reviewRepository: ReviewRepository) {}
 
   async findAllBooks(): Promise<any> {
 
@@ -26,5 +29,17 @@ export class BookService {
     return await this.bookRepository.getAllByCategory(id);
 
   }
+
+  async saveReview(review: CreateReviewDto): Promise<CreateReviewDto> {
+    
+    return await this.reviewRepository.createReview(review);
+
+  }
+
+  async updateReview(review: CreateReviewDto): Promise<any> {
+
+    return await this.reviewRepository.updateReview(review);
+
+  } 
 
 }
