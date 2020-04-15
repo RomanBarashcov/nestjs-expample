@@ -1,3 +1,3 @@
 interface IDataMapper <T, U> {
-    executeMap(): U;
+    executeMap(): U[] | U;
 }

@@ -2,13 +2,14 @@ import { EntityRepository, Repository } from 'typeorm';
 import { Book } from '../../../../core/database/entities/book';
 import { DataMapper } from '../../../../core/lib/dataMapper/index';
 import { BookDetailDto } from '../../dto/book/book.detail.dto';
+import { BaseBookDto } from '../../dto/book/base.book.dto';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
 
-    async getAll(): Promise<Book[]> {
+    async getAll(): Promise<BookDetailDto[]> {
 
-        return await this.find({
+        let books = await this.find({
             join: {
                 alias: "b",
                 leftJoinAndSelect: {
@@ -16,6 +17,9 @@ export class BookRepository extends Repository<Book> {
                 }
             }
         });
+
+
+        return new DataMapper<Book[], BookDetailDto[]>(books, [new BookDetailDto()]).executeMap() as BookDetailDto[];
 
     }
 
@@ -32,7 +36,7 @@ export class BookRepository extends Repository<Book> {
             }
         });
 
-        return new DataMapper<Book, BookDetailDto>(book, new BookDetailDto()).executeMap();
+        return new DataMapper<Book, BookDetailDto>(book, new BookDetailDto()).executeMap() as BookDetailDto;
     }
 
     async getAllByCategory(id: number): Promise<Book[]> {

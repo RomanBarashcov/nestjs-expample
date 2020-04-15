@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BookRepository } from '../repositories/book.repository';
 import { ReviewRepository } from '../repositories/review.repository';
 import { CreateReviewDto } from '../../dto/review/crate.review.dto';
+import { UpdateReviewDto } from '../../dto/review/update.review.dto';
 
 @Injectable()
 export class BookService {
@@ -36,7 +37,7 @@ export class BookService {
 
   }
 
-  async updateReview(review: CreateReviewDto): Promise<any> {
+  async updateReview(review: UpdateReviewDto): Promise<any> {
 
     return await this.reviewRepository.updateReview(review);
 
