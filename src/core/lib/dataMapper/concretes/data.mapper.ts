@@ -16,29 +16,33 @@ export class DataMapper <T, U> implements IDataMapper <T, U> {
 
     };
 
-    executeMapObj(from, to): U {
+    executeMapObj(fromObj, toObj): U {
+ 
+        let fromProperties = Object.getOwnPropertyNames(fromObj);
+        let toProperties = Object.getOwnPropertyNames(toObj);
 
-        let fromProperties = Object.getOwnPropertyNames(from);
-        let toProperties = Object.getOwnPropertyNames(to);
-
-        if(fromProperties.length != toProperties.length) throw "Mapping Error: Object properties are not equals";
+        //if(fromProperties.length != toProperties.length) throw "Mapping Error: Object properties are not equals";
 
         for(let i = 0; i <= fromProperties.length - 1; i++) {
 
-            if(fromProperties[i] !== toProperties[i]) throw "Mapping Error: Incorect property names"
-            to[toProperties[i]] = from[fromProperties[i]];
+            let prop = toProperties.find(p => p === fromProperties[i]);
+            if(prop) {
+                toObj[toProperties[i]] = fromObj[fromProperties[i]];   
+            }
 
         }
 
-        return this.to;
+        return toObj;
+
     };
 
-    executeMapArr(from, to): U[] {
+    executeMapArr(fromObj, toObj): U[] {
 
         let newUArr: U[] = [];
-        
-        for(let i = 0; i <= 0; i++) {
-            newUArr.push(this.executeMapObj(from[i], to[i]));
+
+        for(let i = 0; i <= fromObj.length - 1; i++) {
+            let newObj: U = this.executeMapObj(fromObj[i], {...toObj[0]});
+            newUArr.push(newObj);
         }
 
         return newUArr;
