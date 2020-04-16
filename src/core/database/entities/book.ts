@@ -22,11 +22,22 @@ export class Book {
   price: number;
 
   @OneToMany(type => Category, category => category.books)
-  @JoinColumn({name: "categoryId"})
+  @JoinColumn({name: "id"})
   category: Category;
 
   @ManyToOne(type => Review, review => review.book)
   @JoinColumn({name: "id"})
   reviews: Review[];
+
+  constructor() {
+    this.id = 0;
+    this.title = "";
+    this.description = "";
+    this.cover = "";
+    this.price = 0;
+    this.category = null;
+    this.reviews = [];
+
+  }
 
 }

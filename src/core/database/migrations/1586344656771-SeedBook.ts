@@ -4,6 +4,8 @@ export class SeedBook1586344656771 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
 
+        console.log("------------------------------------------------------------------------->>>>> BookSeed", BookSeed)
+
         await queryRunner
         .manager
         .createQueryBuilder()

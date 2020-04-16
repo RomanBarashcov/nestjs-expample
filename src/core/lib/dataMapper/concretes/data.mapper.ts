@@ -8,7 +8,7 @@ export class DataMapper <T, U> implements IDataMapper <T, U> {
         if(Array.isArray(this.from) 
         && Array.isArray(this.to)) {
 
-            return this.executeMapArr(this.from, this.to);
+            return this.executeMapArrObj(this.from, this.to);
         
         }
 
@@ -36,7 +36,7 @@ export class DataMapper <T, U> implements IDataMapper <T, U> {
 
     };
 
-    executeMapArr(fromObj, toObj): U[] {
+    executeMapArrObj(fromObj, toObj): U[] {
 
         let newUArr: U[] = [];
 

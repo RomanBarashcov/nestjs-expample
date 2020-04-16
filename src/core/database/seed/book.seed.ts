@@ -4,7 +4,7 @@ export const BookSeed = [{
     description: "Description1",
     cover: "Cover1",
     price: 100,
-    categoryId: 1
+    categoryId: 3
 },{
     id: 2,
     title: "Title2",
@@ -18,5 +18,5 @@ export const BookSeed = [{
     description: "Description3",
     cover: "Cover3",
     price: 300,
-    categoryId: 3
+    categoryId: 1
 }]

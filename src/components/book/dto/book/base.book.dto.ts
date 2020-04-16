@@ -20,4 +20,5 @@ export class BaseBookDto {
         this.category = null;
         this.reviews = [];
     }
+
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
 import { BookService } from './providers/services/bookService';
-import { Book } from '../../core/database/entities/book';
+import { CreateBookDto } from '../../components/book/dto/book/create.book.dto';
 import { CreateReviewDto } from '../../components/book/dto/review/crate.review.dto';
 import { UpdateReviewDto } from './dto/review/update.review.dto';
 
@@ -9,7 +9,7 @@ export class BookController {
 
   constructor(private readonly bookService: BookService) {}
 
-  @Get()
+  @Get('/')
   async getBooks(): Promise<any> {
 
     return await this.bookService.findAllBooks();
@@ -30,16 +30,23 @@ export class BookController {
 
   }
 
-  @Post('/reviews')
-  async addReview(@Body() createReviewDto: CreateReviewDto): Promise<any> {
+  @Post('/create/book')
+  async createBook(@Body() createBookDto: CreateBookDto): Promise<any> {
+    
+      return await this.bookService.saveBook(createBookDto);
+  
+  }
 
-    return this.bookService.saveReview(createReviewDto);
+  @Post('/create/review')
+  async createReview(@Body() createReviewDto: CreateReviewDto): Promise<any> {
+
+    return await this.bookService.saveReview(createReviewDto);
 
   }
 
-  @Put('/reviews')
+  @Put('/update/review')
   async updateReview(@Body() updateReviewDto: UpdateReviewDto): Promise<any> {
-
+    
     return await this.bookService.updateReview(updateReviewDto);
 
   }
