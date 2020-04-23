@@ -1,5 +1,5 @@
 
-import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Book } from '../entities/book';
 
 @Entity('Categories')
@@ -11,8 +11,7 @@ export class Category {
   @Column()
   type: string;
 
-  @ManyToOne(type => Book, book => book.category)
-  @JoinColumn({name: "id"})
+  @OneToMany(type => Book, book => book.category)
   books: Book[]
 
 }

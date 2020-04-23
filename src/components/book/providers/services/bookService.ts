@@ -38,7 +38,6 @@ export class BookService {
   async saveBook(book: CreateBookDto): Promise<any> {
 
     book.category = await this.categoryRepository.findCategoryById(book.category.id);
-    debugger;
     return await this.bookRepository.createBook(book);
 
   }

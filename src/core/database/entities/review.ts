@@ -22,5 +22,13 @@ export class Review {
 
   @Column("int")
   rating: number
+
+  constructor() {
+    this.id = 0;
+    this.user = new User();
+    this.book = new Book();
+    this.review = "";
+    this.rating = 5;
+  }
   
 }

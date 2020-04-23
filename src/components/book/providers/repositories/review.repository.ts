@@ -10,7 +10,10 @@ export class ReviewRepository extends Repository<Review> {
     async createReview(review: CreateReviewDto): Promise<CreateReviewDto> {
 
         let newReview: Review = new DataMapper<CreateReviewDto, Review>(review, new Review()).executeMap() as Review;
+        debugger;
         let resNewReview: Review = await this.create(newReview);
+
+
         return new DataMapper<Review, CreateReviewDto>(resNewReview, new CreateReviewDto()).executeMap() as CreateReviewDto;
 
     }

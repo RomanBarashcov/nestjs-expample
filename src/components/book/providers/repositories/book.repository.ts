@@ -3,7 +3,6 @@ import { Book } from '../../../../core/database/entities/book';
 import { DataMapper } from '../../../../core/lib/dataMapper/index';
 import { BaseBookDto } from '../../dto/book/base.book.dto';
 import { CreateBookDto } from '../../dto/book/create.book.dto';
-import { Category } from '../../../../core/database/entities/category';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
@@ -42,11 +41,12 @@ export class BookRepository extends Repository<Book> {
 
     async findAllByCategory(id: number): Promise<BaseBookDto[]> {
 
-        let books: Book[] = await this.createQueryBuilder('Books')
-                        .select(["Books", "category", "reviews"])
-                        .leftJoin("Books.category", "category")
-                        .leftJoin("Books.reviews", "reviews")
-                        .where("category.id = :id", {id: id}).getMany();
+        let books = await this.createQueryBuilder('Books')
+                        .select(["book", "category", "reviews"])
+                        .from(Book, "book")
+                        .leftJoin("book.category", "category")
+                        .leftJoin("book.reviews", "reviews")
+                        .where('"book"."categoryId" = :id', {id: id}).getMany();
 
         return new DataMapper<Book[], BaseBookDto[]>(books, [new BaseBookDto()]).executeMap() as BaseBookDto[];
 
@@ -57,7 +57,7 @@ export class BookRepository extends Repository<Book> {
     
         let book: Book = new DataMapper<CreateBookDto, Book>(bookDto, new Book()).executeMap() as Book;
   
-        let result = await this.insert({
+        book = await this.save({
             title: book.title,
             description: book.description,
             cover: book.cover,
@@ -65,7 +65,7 @@ export class BookRepository extends Repository<Book> {
             category: book.category
         });
 
-        return book.id = result.raw[0].id;
+        return book;
 
     }
 

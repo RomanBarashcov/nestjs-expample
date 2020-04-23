@@ -8,7 +8,7 @@ export class Users1586272650486 implements MigrationInterface {
             "id" SERIAL PRIMARY KEY,
             "email" VARCHAR(50) UNIQUE NOT NULL,
             "phone" INT NOT NULL,
-            "password" VARCHAR(50) UNIQUE NOT NULL,
+            "password" VARCHAR(50) NOT NULL,
             "avatar" VARCHAR(255),
             "roleId" INT REFERENCES "Roles"("id") ON DELETE CASCADE
          )`);

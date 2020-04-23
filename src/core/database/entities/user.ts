@@ -21,9 +21,8 @@ export class User {
   @Column("varchar")
   avatar: string;
 
-  @OneToMany(type => Role, role => role.users)
-  @JoinColumn({name: "roleId"})
-  role: Role
+  @ManyToOne(ype => Role, role => role.users)
+  role: Role;
 
   @OneToMany(type => Review, review => review.book)
   @JoinColumn({name: "id"})

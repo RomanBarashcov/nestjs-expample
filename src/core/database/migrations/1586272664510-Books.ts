@@ -10,7 +10,7 @@ export class Books1586272664510 implements MigrationInterface {
             "description" TEXT NOT NULL,
             "cover" VARCHAR(255),
             "price" INT DEFAULT 0,
-            "categoryId" INT REFERENCES "Categories"("id") ON DELETE CASCADE
+            "categoryId" INT REFERENCES "Categories"("id")
          )`);
 
     }

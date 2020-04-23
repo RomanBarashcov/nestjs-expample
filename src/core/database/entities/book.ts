@@ -21,8 +21,7 @@ export class Book {
   @Column("int")
   price: number;
 
-  @OneToMany(type => Category, category => category.books)
-  @JoinColumn({name: "id"})
+  @ManyToOne(type => Category, category => category.books)
   category: Category;
 
   @ManyToOne(type => Review, review => review.book)
